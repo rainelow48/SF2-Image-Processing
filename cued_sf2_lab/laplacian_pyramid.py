@@ -39,12 +39,12 @@ def rowdec(X: np.ndarray, h: np.ndarray) -> np.ndarray:
     if m % 2:
         X = np.pad(X, [(0, 0), (m2, m2)], mode='reflect')
     else:
-        X = np.pad(X, [(0, 0), (m2-1, m2-1)], mode='symmetric')
+        X = np.pad(X, [(0, 0), (m2 - 1, m2 - 1)], mode='symmetric')
 
-    Y = np.zeros((r, (c+1)//2))
+    Y = np.zeros((r, (c + 1) // 2))
     # Loop for each term in h.
     for i in range(m):
-        Y = Y + h[i] * X[:, i:i+c:2]
+        Y = Y + h[i] * X[:, i:i + c:2]
     return Y
 
 
@@ -70,12 +70,12 @@ def rowdec2(X: np.ndarray, h: np.ndarray) -> np.ndarray:
     if m % 2:
         X = np.pad(X, [(0, 0), (m2, m2)], mode='reflect')
     else:
-        X = np.pad(X, [(0, 0), (m2-1, m2-1)], mode='symmetric')
+        X = np.pad(X, [(0, 0), (m2 - 1, m2 - 1)], mode='symmetric')
 
     Y = np.zeros((r, c // 2))
     # Loop for each term in h.
     for i in range(m):
-        Y = Y + h[i] * X[:, i+1:i+c:2]
+        Y = Y + h[i] * X[:, i + 1:i + c:2]
     return Y
 
 
@@ -114,14 +114,14 @@ def beside(X1, X2):
     [m2, n2] = X2.shape
     # print(m1,n1,m2,n2)
     m = max(m1, m2)
-    Y = np.zeros((m, n1+n2+1))
+    Y = np.zeros((m, n1 + n2 + 1))
     # print(Y.shape)
     # print(((m-m1)/2)+1)
     # print(type(n1))
 
     # index slicing must use integers
-    Y[int(((m-m1)/2)):int(((m-m1)/2)+m1), :n1] = X1
-    Y[int(((m-m2)/2)):int(((m-m2)/2)+m2), n1+1:n1+1+n2] = X2
+    Y[int(((m - m1) / 2)):int(((m - m1) / 2) + m1), :n1] = X1
+    Y[int(((m - m2) / 2)):int(((m - m2) / 2) + m2), n1 + 1:n1 + 1 + n2] = X2
 
     return Y
 
@@ -150,12 +150,13 @@ def rowint(X: np.ndarray, h: np.ndarray) -> np.ndarray:
     X2 = np.zeros((r, c2), dtype=X.dtype)
     X2[:, ::2] = X
 
-    X2 = np.pad(X2, [(0, 0), (m2, m2)], mode='reflect' if m % 2 else 'symmetric')
+    X2 = np.pad(X2, [(0, 0), (m2, m2)],
+                mode='reflect' if m % 2 else 'symmetric')
 
     Y = np.zeros((r, c2))
     # Loop for each term in h.
     for i in range(m):
-        Y = Y + h[i] * X2[:, i:i+c2]
+        Y = Y + h[i] * X2[:, i:i + c2]
     return Y
 
 
@@ -177,7 +178,7 @@ def rowint2(X, h):
     Y = np.zeros((r, c2))
     # Loop for each term in h.
     for i in range(m):
-        Y = Y + h[i] * X2[:, i:i+c2]
+        Y = Y + h[i] * X2[:, i:i + c2]
     return Y
 
 
@@ -194,12 +195,12 @@ def quant1(x, step, rise1=None):
         q = x.copy()
         return q
     if rise1 is None:
-        rise = step/2.0
+        rise = step / 2.0
     else:
         rise = rise1
     # Quantise abs(x) to integer values, and incorporate sign(x)..
-    temp = np.ceil((np.abs(x) - rise)/step)
-    q = temp*(temp > 0)*np.sign(x)
+    temp = np.ceil((np.abs(x) - rise) / step)
+    q = temp * (temp > 0) * np.sign(x)
     return q
 
 
@@ -216,19 +217,20 @@ def quant2(q, step, rise1=None):
         y = q.copy()
         return y
     if rise1 is None:
-        rise = step/2.0
+        rise = step / 2.0
         return q * step
     else:
         rise = rise1
         # Reconstruct quantised values and incorporate sign(q).
-        y = q * step + np.sign(q) * (rise - step/2.0)
+        y = q * step + np.sign(q) * (rise - step / 2.0)
         return y
 
 
 class QuantizingEncoder(Encoder):
+
     def __init__(self, step, rise1=None):
         if rise1 is None:
-            rise1 = step/2
+            rise1 = step / 2
         self.step = step
         self.rise1 = rise1
 
@@ -251,7 +253,7 @@ def quantise(x, step, rise1=None):
         y = x.copy()
         return y
     if rise1 is None:
-        rise = step/2.0
+        rise = step / 2.0
     else:
         rise = rise1
     # Perform both quantisation steps
@@ -269,7 +271,7 @@ def bpp(x):
     minx = np.min(x, axis=None)
     maxx = np.max(x, axis=None)
     # Calculate histogram of x in bins defined by bins.
-    bins = list(range(int(np.floor(minx)), int(np.ceil(maxx)+1)))
+    bins = list(range(int(np.floor(minx)), int(np.ceil(maxx) + 1)))
     if len(bins) < 2:
         # in this case there is no information, as all the values are identical
         return 0
