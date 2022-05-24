@@ -84,7 +84,7 @@ def plotImg(
     cmap=None,
     save=False,
     name='Image.png',
-    dest='D:\\Cambridge\\Part IIA\\Projects\\SF2-Image-Processing\\Reports\\Report 1 Figures'
+    dest='D:\\Cambridge\\Part IIA\\Projects\\SF2-Image-Processing\\Reports\\'
 ):
 
     rows = math.ceil(len(imgs) / cols)
