@@ -1,0 +1,9 @@
+EBNFcommand = {statement} ;
+
+statement = device_statement | connection_statement | monitor_statement ;
+
+device_statement = "DEVICE", device_substatement, 
+                   {",", device_substatement} ";" ;
+
+device_substatement = device_ip_statement | device_op_statement |
+                      device_clock_statement | device_generic_statement ;

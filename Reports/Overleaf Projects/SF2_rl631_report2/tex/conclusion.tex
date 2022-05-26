@@ -1,0 +1,21 @@
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+
+\cline{1-4} \cline{6-8}
+Compression & \multicolumn{3}{|c|}{N} & & Compression & \multicolumn{2}{|c|}{Schemes}\\
+\cline{2-4} \cline{7-8}
+Technique & 4 & 8 & 16 & & Technique & Constant Step & Constant MSE\\
+\cline{1-4} \cline{6-8}
+DCT & 3.20 & 3.21 & 2.88 & & DWT & 2.77 (Level 2) & 3.10 (Level 8)\\
+\cline{1-4} \cline{6-8}
+LBT (s = 1.4) & 3.56 & 3.42 & 2.95 & & Laplacian (3-tap) & 1.389 (Level 2) & 1.550 (Level 4)\\
+\cline{1-4} \cline{6-8}
+
+\end{tabular}
+\caption{Compression Ratios across different Compression Techniques for Lighthouse Image}
+\label{tab:compression ratios}
+\vspace{-2mm}
+\end{table}
+
+Table \ref{tab:compression ratios} summarises the compression ratios across various compression techniques for the lighthouse image. All three transform-based methods resulted in a higher compression ratio as compared to the Laplacian Pyramid, as they do not expand on the number of samples. The DCT technique is found to cause block artefacts in the reconstructed image, which can be reduced by pre-filtering in the LBT technique, giving better compression ratio and visual quality. For both methods, $N=8$ is optimal. The DWT technique has both better compression ratio and visual performance compared to the Laplacian Pyramid, with the MSE scheme giving better overall performance compared to the constant step scheme. The DWT method is also found to not perform as well with the bridge image, where there are more complex edges present.

@@ -1,0 +1,91 @@
+\documentclass[paper = a4, 11pt]{article}
+\textwidth 18cm \textheight 24.5cm
+\topmargin -2.5cm \oddsidemargin -0.8cm
+\footskip 0.8cm
+\setlength{\parindent}{0cm}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, graphicx, epsfig, hyperref, subcaption, amssymb}
+\usepackage{multirow, multicol, listings, xcolor}
+\usepackage{titlesec, pdflscape}
+\usepackage[font=small,skip=0pt]{caption}
+\counterwithin{figure}{section}
+\counterwithin{equation}{section}
+\counterwithin{table}{section}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\medium\bfseries}
+\titleformat*{\subsubsection}{\medium\bfseries}
+\titleformat*{\paragraph}{\large\bfseries}
+\titleformat*{\subparagraph}{\large\bfseries}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+\begin{document}
+\noindent
+\rule{18cm}{0.3mm}
+\begin{center}
+    {SF2 Image Processing - Interim Report 2\\
+    Raine Low (rl631), Peterhouse}
+\end{center}
+\vspace{-2mm}
+\rule{18cm}{0.3mm}
+
+% Import tex files
+\section*{Introduction}
+\label{sec:introduction}
+\vspace{-2mm}
+\input{tex/1. introduction}
+
+\section{Discrete Cosine Transform (DCT)}
+\label{sec:dct}
+\vspace{-2mm}
+\input{tex/2. dct}
+
+\section{Lapped Bi-orthogonal Transform (LBT)}
+\label{sec:lbt}
+\vspace{-2mm}
+\input{tex/3. lbt}
+
+\section{Discrete Wavelet Transform (DWT)}
+\label{sec:dwt}
+\vspace{-2mm}
+\input{tex/4. dwt}
+
+\section*{Conclusion}
+\label{sec:conclusion}
+\vspace{-5mm}
+\input{tex/conclusion}
+
+\newpage
+\appendix
+\section{Appendix}
+\label{sec:appendix}
+\input{tex/appendix}
+
+\end{document}

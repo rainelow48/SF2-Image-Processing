@@ -78,10 +78,10 @@ def decode(Ys, Xn, filt):
 def plotImg(
     imgs,
     cols,
-    title='Image: ',
+    title='',
     index=[],
     scale=4,
-    cmap=None,
+    cmap='gray',
     save=False,
     name='Image.png',
     dest='D:\\Cambridge\\Part IIA\\Projects\\SF2-Image-Processing\\Reports\\'

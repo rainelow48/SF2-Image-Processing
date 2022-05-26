@@ -1,0 +1,127 @@
+% This file consists of templates to include equations, figures and tables
+
+\section{Templates} \label{sec:template}
+% -----------------------------------------------------
+\subsection{Equations} \label{sec:eqn}
+% --------------------- EQUATIONS ---------------------
+\begin{align}
+\centering
+    % Type your equation here
+    h(n) & = G \cos \left( \frac{n\pi}{N+1} \right) \quad \text{for} {\ } \frac{-\left(N-1\right)}{2} \leq n \leq \frac{\left(N-1\right)}{2} \\
+    \sum_{n = -(N-1)/2}^{(N-1)/2} h(n) & = 1
+    % \left or \right before brackets (){}[] adjusts the bracket size according to equation needs
+    % {\ } : leaves a space between two parts of the equation
+    % \quad : leaves a larger space between two parts of the equation
+    % \\ : does a line break between equations
+    % & : aligns all the & across each line of equations
+    \label{eqn:halfcos}
+\end{align}
+
+% -----------------------------------------------------
+\subsection{Figures} \label{sec:fig}
+% --------------------- FIGURES ---------------------
+% Standard single figure
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[height = 5cm, width = 16cm]{Images/Quantised.png}
+    \caption{Decoded quantised images for varying pyramid levels}
+    \label{fig:quantised}
+\end{figure}
+
+% Side by side figures
+% '%' after \end{subfigure} makes figures appear side by side
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=5cm]{Images/Constant Step Lap 5.png}
+  \caption{Constant Step Sizes}
+  \label{fig:const_step_lap5}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=5cm]{Images/Constant MSE Lap 5.png}
+  \caption{Constant MSE}
+  \label{fig:const_mse_lap5}
+\end{subfigure}
+\caption{Decoded images for constant step sizes and constant MSE schemes for 5-tap filter}
+\label{fig:lap5}
+\end{figure}
+
+% -----------------------------------------------------
+\subsection{Tables} \label{sec:tab}
+% --------------------- TABLES ---------------------
+% Standard table
+% | : border between cells
+% \hline : horizontal border between cells
+% l, c, r : align text to left, center, right of cell
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Filter length (N) & 1 & 5 & 9 & 15 & 21 & 27 & 35 & 43 & 51\\
+\hline
+Low-pass image energy (\%) & 100 & 97.18 & 96.22 & 95.34 & 94.69 & 94.14 & 93.52 & 92.99 & 92.53\\
+\hline
+High-pass image energy (\%) & 0 & 1.91 & 2.75 & 3.64 & 4.13 & 4.52 & 4.99 & 5.44 & 5.84\\
+\hline
+\end{tabular}
+\caption{Energy of low-pass and high-pass image}
+\label{table:energy}
+\vspace{-0.7cm}
+\end{table}
+
+% Table with merged cells
+% Requires package \multirow, \multicol
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+        & Pyramid height & \multicolumn{8}{|c|}{Levels 0 to 8} \\
+        %0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+        \hline
+        \multirow{2}{*}{\rotatebox[origin=c]{90}{rota}}
+        & Step Size & 17.000 & 15.186 & 13.265 & 11.607 & 10.303 & 9.429 & 8.869 & 8.675 \\ \cline{2-10}
+        & Compression Ratio & 1.000 & 1.329 & 1.389 & 1.325 & 1.249 & 1.192 & 1.155 & 1.142\\
+        \hline
+        Equal & Step Scale & 17.000 & 18.579 & 18.513 & 18.104 & 18.092 & 18.080 & 18.081 & 18.079 \\ \cline{2-10}
+        MSE & Compression Ratio & 1.000 & 1.394 & 1.541 & 1.549 & 1.550 & 1.549 & 1.548 & 1.548\\
+        \hline
+    \end{tabular}
+    \caption{Quantisation step sizes and compression ratios for constant step sizes and equal MSE}
+    \label{tab:const_RMS_lap3}
+\end{table}
+
+
+% -----------------------------------------------------
+\subsection{Codes} \label{sec:code}
+% --------------------- CODES ---------------------
+% Writing directly in tex file
+\begin{lstlisting}[language=MATLAB, caption=Own DFT function to compute DFT directly, label={lst:dft}]
+function output = compute_dft_vectorized(input)
+ assert(isvector(input));
+ N = numel(input);
+ matrix = exp(-2j * pi / N * (0 : N-1)' * (0 : N-1));
+ output = matrix * input;
+end
+\end{lstlisting}
+
+% Importing from file
+\lstinputlisting[caption = EBNF syntax, label = {lst:EBNF syntax}, breaklines = true, basicstyle = \small]{Images/EBNF.txt}
+
+% -----------------------------------------------------
+\subsection{Lists} \label{sec:list}
+% --------------------- LISTS ---------------------
+
+\begin{enumerate}
+   \item The labels consists of sequential numbers
+   \begin{itemize}
+     \item The individual entries are indicated with a black dot, a so-called bullet
+     \item The text in the entries may be of any length
+     \begin{description}
+     \item[Note:] I would like to describe something here
+     \item[Caveat!] And give a warning here
+     \end{description}
+   \end{itemize}
+   \item The numbers starts at 1 with each use of the \texttt{enumerate} environment
+\end{enumerate}

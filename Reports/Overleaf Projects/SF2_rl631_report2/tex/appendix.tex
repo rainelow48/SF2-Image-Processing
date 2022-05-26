@@ -1,0 +1,174 @@
+% DCT Section
+\subsection{Discrete Cosine Transform}
+\vspace{-2mm}
+%-----------------
+% Forward DCT
+\begin{equation}
+    y(k) = \sum_{n=0}^{N-1} C_{kn}{\ }x(n) {\ } \text{for} {\ } 0 \leq k \leq N-1, {\ } \text{where} {\ } C_{0n} = \sqrt{\frac{1}{N}} {\ } \text{and} {\ } C_{kn} = \sqrt{\frac{2}{N}} \cos \frac{k(n+\frac{1}{2})\pi}{N}
+    \label{eqn:dct}
+\end{equation}
+\vspace{-2mm}
+% Inverse DCT
+\begin{equation}
+    x(k) = \sum_{k=0}^{N-1} C_{kn} {\ } y(k) \quad \text{for} {\ } 0 \leq n \leq N-1
+    \label{eqn:idct}
+\end{equation}
+\vspace{-2mm}
+
+% DCT regroup and basis function
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width = 8cm]{Images/DCT regroup and basis functions.png}
+  \caption{$8 \times 8$ DCT Regrouped (Left), 64 basis functions (Right)}
+  \label{fig:DCT regrouped and basis function}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width = 8cm]{Images/DCT quantised.png}
+  \caption{Quantised with step=17 (Left), Reconstructed (Right)}
+  \label{fig:DCT quantised}
+\end{subfigure}
+\caption{DCT Figures}
+\label{fig:DCT introduction}
+\end{figure}
+
+% DCT 4, 8, 16 points
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 18cm]{Images/DCT comparison.png}
+    \caption{Reconstructed Images for Direct Quantisation and 4, 8 and 16-point DCT}
+    \label{fig:DCT 4 8 16}
+\end{figure}
+
+%-------------------
+% LBT section
+\subsection{Lapped Bi-orthogonal Transform}
+\vspace{-2mm}
+%-------------------
+% LBT scaling factor
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.35\textwidth}
+  \centering
+  \includegraphics[height = 4.5cm]{Images/LBT scalings.png}
+    \caption{Graph of Compression Ratios against Scaling Factor}
+    \label{fig:LBT scaling}
+\end{subfigure}%
+\begin{subfigure}{.6\textwidth}
+  \centering
+  \includegraphics[height = 4cm]{Images/LBT s range.png}
+  \caption{Reconstructed images for selected scaling factors}
+  \label{fig:LBT s range}
+\end{subfigure}
+\caption{LBT Compression Ratios and Reconstructed Images}
+\label{fig:LBT}
+\end{figure}
+
+% LBT bases and Xp
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 18cm]{Images/Xp_srange.png}
+    \caption{LBT bases and pre-filtered images \texttt{Xp}}
+    \label{fig:LBT bases and Xp}
+\end{figure}
+
+% LBT 4 8 16
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 18cm]{Images/LBT_4_8_16.png}
+    \caption{LBT for $4 \times 4$, $8 \times 8$ and $16 \times 16$ blocks with $s = 1.4$}
+    \label{fig:LBT 4 8 16}
+\end{figure}
+
+%-----------------
+% DWT section
+\subsection{Discrete Wavelet Transform}
+\vspace{-2mm}
+%-----------------
+% DWT filters
+\begin{align}
+\centering
+    h1 & = [-1 {\ \ }2 {\ \ }6 {\ \ }2 {\ }-1]/8
+    & h2 & = [-1 {\ \ }2 {\ }-1]/4 \label{eqn:DWT forward filters}\\
+    g1 & = [1 {\ \ }2 {\ \ }1]/2
+    & g2 & = [-1 {\ }-2 {\ \ }6 {\ }-2 {\ }-1]/4
+    \label{eqn:DWT reverse filters}
+\end{align}
+\vspace{-2mm}
+
+
+% DWT introduction
+\begin{figure}[h]
+\centering
+  \includegraphics[height = 5cm]{Images/DWT.png}
+  \caption{DWT Transform Process}
+  \label{fig:DWT Transform Process}
+\end{figure}
+\vspace{-2mm}
+
+
+\begin{figure}[h!]
+\begin{subfigure}{.5\textwidth}
+\centering
+  \includegraphics[width=7cm]{Images/Step Sizes.png}
+  \caption{Step sizes}
+  \label{fig:DWT step sizes}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+  \includegraphics[width=7cm]{Images/Compression Ratios.png}
+  \caption{Compression ratios}
+  \label{fig:DWT compression ratios}
+\end{subfigure}
+\caption{DWT Step Sizes and Compression Ratios}
+\label{fig:DWT step sizes and compression ratios}
+\end{figure}
+
+% Quantisation and coding efficiency
+%--------------------------
+% Reconstructed images
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.6\textwidth}
+  \centering
+    \includegraphics[height=7cm]{Images/Constant Step LHB.png}
+    \caption{Constant step size scheme}
+    \label{fig: DWT Constant Step LHB}
+\end{subfigure}%
+\begin{subfigure}{.4\textwidth}
+  \centering
+    \includegraphics[height=7cm]{Images/Constant MSE LHB.png}
+    \caption{Constant MSE scheme}
+    \label{fig:DWT Constant MSE LHB}
+\end{subfigure}
+\caption{DWT Reconstructed Images}
+\label{fig:DWT Reconstructed images}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+  \includegraphics[height = 5cm]{Images/DWT Level 1 LHB.png}
+  \caption{DWT Level 1, Lighthouse vs Bridge}
+  \label{fig:DWT Level 1 LHB}
+\end{figure}
+
+% Laplacian Comparison
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.4\textwidth}
+  \centering
+    \includegraphics[height = 5cm]{Images/Laplacian Compression ratios.png}
+    \caption{Compression Ratios for the Laplacian Pyramid Technique}
+    \label{fig:Laplacian Compression Ratio}
+\end{subfigure}%
+\begin{subfigure}{.6\textwidth}
+  \centering
+    \includegraphics[width = 7cm]{Images/Laplacian Comparison.png}
+    \caption{Reconstructed images for the Laplacian Pyramid at optimal levels}
+    \label{fig:Laplacian Reconstructed Images}
+\end{subfigure}
+\caption{Laplacian Compression Ratios and Reconstructed Images}
+\label{fig:Laplacian Comparison}
+\end{figure}

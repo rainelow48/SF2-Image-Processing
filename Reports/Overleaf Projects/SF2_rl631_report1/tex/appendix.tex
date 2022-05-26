@@ -1,0 +1,100 @@
+\newpage
+\appendix
+\section{Appendix}
+\subsection{Simple Image Filter - Half-Cosine Pulse}
+
+\begin{equation}
+    h(n) = G \cos \left( \frac{n\pi}{N+1} \right) \quad \text{for} {\ } \frac{-\left(N-1\right)}{2} \leq n \leq \frac{\left(N-1\right)}{2}, \quad \sum_{n = -(N-1)/2}^{(N-1)/2} h(n) = 1
+    \label{eqn:halfcos}
+\end{equation}
+
+\begin{equation}
+    E = \sum_{i=1}^{R}\sum_{j=1}^{C} X_{ij}^{2}
+\label{eqn:energy}
+\end{equation}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width = 16cm]{Images/Halfcosine.png}
+    \caption{Low-pass (left) and high-pass (right) images from half-cosine pulse filter of varying lengths N }
+    \label{fig:halfcosine}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Filter length (N) & 1 & 5 & 9 & 15 & 21 & 27 & 35 & 43 & 51\\
+\hline
+Low-pass image energy (\%) & 100 & 97.18 & 96.22 & 95.34 & 94.69 & 94.14 & 93.52 & 92.99 & 92.53\\
+\hline
+High-pass image energy (\%) & 0 & 1.91 & 2.75 & 3.64 & 4.13 & 4.52 & 4.99 & 5.44 & 5.84\\
+\hline
+\end{tabular}
+\caption{Energy of low-pass and high-pass images}
+\label{table:energy}
+\vspace{-0.7cm}
+\end{table}
+
+\subsection{Laplacian Pyramid}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width = 16cm]{Images/Quantised.png}
+    \caption{Decoded quantised images for varying pyramid levels}
+    \label{fig:quantised}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=8cm]{Images/Step sizes.png}
+  \caption{Step sizes}
+  \label{fig:step sizes}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=8cm]{Images/Compression ratios.png}
+  \caption{Compression ratios}
+  \label{fig:compression ratios}
+\end{subfigure}
+\caption{Step sizes and compression ratios for different schemes}
+\label{fig:step size and compression ratios}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=6cm]{Images/Constant Step Lap 3.png}
+  \caption{Constant Step Sizes}
+  \label{fig:const_step_lap3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=6cm]{Images/Constant MSE Lap 3.png}
+  \caption{Constant MSE}
+  \label{fig:const_mse_lap3}
+\end{subfigure}
+\caption{Decoded images for constant step sizes and constant MSE schemes for 3-tap filter}
+\label{fig:lap3}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=6cm]{Images/Constant Step Lap 5.png}
+  \caption{Constant Step Sizes}
+  \label{fig:const_step_lap5}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=6cm]{Images/Constant MSE Lap 5.png}
+  \caption{Constant MSE}
+  \label{fig:const_mse_lap5}
+\end{subfigure}
+\caption{Decoded images for constant step sizes and constant MSE schemes for 5-tap filter}
+\label{fig:lap5}
+\end{figure}

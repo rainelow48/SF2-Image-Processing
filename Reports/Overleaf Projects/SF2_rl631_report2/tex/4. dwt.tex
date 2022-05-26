@@ -1,0 +1,33 @@
+The DWT attempts to combine the best features of the Laplacian Pyramid and the DCT by analysing the image at different levels and avoiding expansion in the number of coefficients. At each level, the DWT filters and decimates the image row-wise and column-wise with filters \texttt{h1} and \texttt{h2} respectively, to generate 4 sub-images, with the low-pass image on the top left and 3 high-pass images, capturing the vertical and horizontal frequencies, and a combination of both. The low-pass image is passed on to the next level and the process is repeated, generating 3N high-pass images and 1 low-pass image for a N level DWT. Compression is achieved by quantisation of the sub-images separately, and the image can be reconstructed by repeatedly interpolating row-wise and column-wise with the reconstruction filters \texttt{g1} and \texttt{g2} respectively, for each layer. \\
+
+Figure \ref{fig:DWT Transform Process} shows the DWT transform process, using filters in Equation \ref{eqn:DWT forward filters}. After row-filtering with filter \texttt{h1}, the energy of the low-pass image is found to be higher, at $8.23\times 10^7$, compared to the energy of the high-pass image, at $3.50\times 10^6$, since there are less details in the high-pass image. The subsequent column-filtering with filter \texttt{h2} picks out the vertical frequencies from the fence and lighthouse, in the top right sub-image, horizontal frequencies from the houses, in the bottom left sub-image, and parts of the image with both vertical and horizontal frequencies in the bottom right sub-image. The top left image remains as a low-pass image. This observation is expected as performing filtering in the horizontal direction (row-filtering) would leave out the vertical frequencies, and vice versa, which is extracted as the high-pass image.\\
+
+\subsection{Quantisation and Coding Efficiency} \label{sec:DWT Quantisation}
+\vspace{-2mm}
+The images \texttt{lighthouse.mat} and \texttt{bridge.mat} are filtered with LeGall filters and reconstructed using filters in Equations \ref{eqn:DWT forward filters} and \ref{eqn:DWT reverse filters}. The performance of the DWT under the constant step size scheme and constant mean-squared-error (MSE) scheme is investigated and the optimal levels of DWT is suggested for each case. \\
+
+
+For both the constant step size and constant MSE schemes, the respective step sizes and compression ratios can be found in Figures \ref{fig:DWT step sizes} and \ref{fig:DWT compression ratios}. The step size ratios for the MSE scheme is calculated from the impulse response\footnote{The impulse response of a sub-image is given by the energy of the reconstructed image with an impulse of 100 in the centre of a sub-image and all other pixels taking value 0, obtained from taking the inverse DWT. This process is repeated for all sub-images for various levels and the step size ratio is obtained by taking the reciprocal of the square root of the energies.} and given in Table \ref{table:MSE step size} below. For an N level DWT, the $3\times (N+1)$ matrix \texttt{dwtstep} is formed from values of the first two rows corresponding to columns 1 to N, and the value from the third row of the N$^{th}$ column. The reconstructed images are shown in Figures \ref{fig: DWT Constant Step LHB} and \ref{fig:DWT Constant MSE LHB} respectively.\\
+\vspace{-2mm}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+DWT Levels & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\hline
+k = \{0, 1\} & 0.000 & 1.000 & 0.652 & 0.356 & 0.182 & 0.092 & 0.042 & 0.012 & 0.010\\
+\hline
+k = 2 & 0.000 & 0.722 & 0.563 & 0.327 & 0.171 & 0.086 & 0.035 & 0.011 & 0.012\\
+\hline
+Low-pass & 1.000 & 1.384 & 0.755 & 0.386 & 0.194 & 0.097 & 0.049 & 0.012 & 0.008\\
+\hline
+\end{tabular}
+\caption{MSE scheme step size ratios}
+\label{table:MSE step size}
+\vspace{-0.4cm}
+\end{table}
+
+It can be observed from Figure \ref{fig:DWT compression ratios} that both the lighthouse and bridge images, have the best compression ratio at $2.77$ and $1.81$ respectively, when a 2 level DWT is used for the constant step size scheme. From Figure \ref{fig: DWT Constant Step LHB}, it is observed that details in the sky are lost for the lighthouse image as the DWT levels increases, while there is no significant visual difference for the bridge images. Therefore, an optimal DWT level for both images is 2. For the MSE scheme, the compression ratio peaks and plateaus after 3 levels of DWT for both images, at around $3.09$ and $1.92$ respectively. Considering the reconstructed images in Figure \ref{fig:DWT Constant MSE LHB}, we observe that the visual performance of both images are similar for different DWT levels, hence the optimal DWT level is 8, where the compression ratio is the highest at $3.10$ and $1.92$ respectively. In both schemes, is it observed that there is no significant visual difference for the bridge image across different DWT levels. This is because the bridge image has more complex edges, in which the DWT filters are unable to pick out efficiently as shown in Figure \ref{fig:DWT Level 1 LHB}. This explains the significantly lower compression ratios across both schemes.\\
+
+Compared to the Laplacian Pyramid compression ratios as shown in Figure \ref{fig:Laplacian Compression Ratio}, the DWT ratios take a similar shape, where it peaks at level 2 for the constant step scheme and plateaus after level 3 for the MSE scheme. For the lighthouse image, the DWT is found to perform much better in terms of both compression ratio, with an increase of almost 2-fold, and visual performance, comparing Figures \ref{fig:DWT Reconstructed images} and \ref{fig:Laplacian Reconstructed Images}.

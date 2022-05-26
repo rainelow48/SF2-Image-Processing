@@ -1,0 +1,23 @@
+\section{Laplacian Pyramid} \label{sec:laplacian}
+The Laplacian pyramid is an energy compaction technique by filtering an image into a low and high-pass image at each layer. The low-pass image is sub-sampled to a quarter its original size and passed into the next layer. The encoding process repeats for each layer, generating N high-pass images and one low-pass image for a N layer pyramid. Compression is then achieved by the quantisation of the $N+1$ images. The original image can be decoded by repeatedly interpolating the low-pass image to 4 times its size and adding the high-pass image of the layer above.\\
+
+In Sections \ref{sec:compression ratio and rms} and \ref{sec:quantisation}, the effect of the number of layers of the pyramid on the compression ratio and reconstructed image is investigated for two compression schemes and two filters. An optimal pyramid layer is also suggested for each case, by considering the compression ratio and visuals of the reconstructed image.
+
+\subsection{Compression ratio and RMS error} \label{sec:compression ratio and rms}
+The \texttt{lighthouse.mat} image, X, is filtered with a 3-tap filter $h = \frac{1}{4}[1{\ }2{\ }1]$. The entropy of the images X, X1 and Y0 is calculated to be $3.48$, $3.41$ and $1.62$, giving the total number of bits to encode the images as $2.28 \times 10^{5}$, $5.59 \times 10^{4}$ and $1.06 \times 10^{5}$ respectively. For a constant quantisation step size of 17, the compression ratio and the root-mean-squared (RMS) error of the decoded images are given in Table \ref{tab:const_step}.  It is observed that both the compression ratio and RMS error increases with more layers, but the compression ratio plateaus at 1.662 after the $4^{th}$ layer, due to the exponential decrease in image pixels. From Figure \ref{fig:quantised}, it is observed that the images becomes more patchy (the sky) and less defined (edges of the roof, fences, etc.) as the number of pyramid layers increases. This is possibly due to the loss of information during quantisation, which propagates through the layers, resulting in an increase in RMS error with more layers.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+        Pyramid height & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+        \hline
+        Compression Ratio & 1.000 & 1.407 & 1.599 & 1.650 & 1.661 & 1.662 & 1.662 & 1.662\\
+        \hline
+        RMS Error & 4.861 & 5.383 & 6.067 & 6.752 & 7.630 & 8.451 & 9.203 & 9.406 \\
+        \hline
+    \end{tabular}
+    \caption{Compression ratio and RMS error at constant quantisation step size of 17}
+    \label{tab:const_step}
+    \vspace{-0.7cm}
+\end{table}
