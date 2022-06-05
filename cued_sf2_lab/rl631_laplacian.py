@@ -84,7 +84,7 @@ def plotImg(
     cmap='gray',
     save=False,
     name='Image.png',
-    dest='D:\\Cambridge\\Part IIA\\Projects\\SF2-Image-Processing\\Reports\\'
+    dest='D:\\Cambridge\\Part IIA\\Projects\\SF2 Image Processing\\SF2-Image-Processing\\Reports\\'
 ):
 
     rows = math.ceil(len(imgs) / cols)
@@ -117,11 +117,11 @@ def plotImg(
             ax[row][col].set_title(title + str(index[i]))
             ax[row][col].imshow(imgs[i], cmap=cmap)
             ax[row][col].axis('off')
-    
-    fig.subplots_adjust(wspace=0, hspace=0, top = 1)
+
+    fig.subplots_adjust(wspace=0, hspace=0, top=1)
     # Save image to destination
     if save:
-        plt.savefig(dest + '\\' + name, bbox_inches='tight', pad_inches = 0.0)
+        plt.savefig(dest + '\\' + name, bbox_inches='tight', pad_inches=0.0)
 
     # Display image on console
     plt.show()
@@ -227,7 +227,7 @@ def RMSdiff(img, filt, level, step, rmsRef):
     return rmsdiff
 
 
-def findSteps(img, filt, levels, stepratio, initGuess, rmsRef, disp = False):
+def findSteps(img, filt, levels, stepratio, initGuess, rmsRef, disp=False):
     """
     Function to optimise quantisation step size w.r.t. rmsRef
     
